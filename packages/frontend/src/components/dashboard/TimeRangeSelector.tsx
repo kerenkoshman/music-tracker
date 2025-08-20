@@ -14,7 +14,7 @@ const TimeRangeSelector: React.FC<TimeRangeSelectorProps> = ({ selectedRange, on
   ];
 
   return (
-    <div className="flex space-x-2">
+    <div style={{ display: 'flex', gap: '0.5rem' }}>
       {timeRanges.map((range) => (
         <Button
           key={range.value}

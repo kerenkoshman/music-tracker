@@ -17,12 +17,12 @@ A web application to track users' music listening habits and display statistics 
 ---
 
 ## Phase 1: Project Setup & Foundation
-- [ ] Initialize project structure and git repository
-- [ ] Set up pnpm workspace with monorepo structure
-- [ ] Configure ESLint and Prettier
-- [ ] Set up basic folder structure (frontend, backend, shared)
-- [ ] Create initial README.md with project description
-- [ ] Set up GitHub repository and initial commit
+- [x] Initialize project structure and git repository
+- [x] Set up pnpm workspace with monorepo structure
+- [x] Configure ESLint and Prettier
+- [x] Set up basic folder structure (frontend, backend, shared)
+- [x] Create initial README.md with project description
+- [x] Set up GitHub repository and initial commit
 - [ ] Configure basic CI/CD pipeline
 
 ## Phase 2: Backend Foundation

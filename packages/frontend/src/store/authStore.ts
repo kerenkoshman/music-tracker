@@ -1,5 +1,21 @@
 import { create } from 'zustand';
-import { AuthState, User } from '../types';
+
+interface User {
+  id: string;
+  email: string;
+  name: string;
+  picture?: string;
+  spotifyConnected: boolean;
+  createdAt: string;
+  updatedAt: string;
+}
+
+interface AuthState {
+  user: User | null;
+  isAuthenticated: boolean;
+  isLoading: boolean;
+  error: string | null;
+}
 
 interface AuthStore extends AuthState {
   setUser: (user: User | null) => void;

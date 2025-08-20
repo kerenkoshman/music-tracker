@@ -14,14 +14,14 @@ const LoginPage: React.FC = () => {
   }, [isAuthenticated, navigate]);
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50">
+    <div className="min-h-screen flex items-center justify-center">
       <div className="container">
-        <div className="card max-w-md mx-auto">
+        <div className="card" style={{ maxWidth: '28rem', margin: '0 auto' }}>
           <div className="text-center mb-6">
-            <h1 className="text-3xl font-bold text-gray-900 mb-2">
+            <h1 className="text-3xl font-bold mb-2" style={{ color: '#111827' }}>
               Welcome to Music Tracker
             </h1>
-            <p className="text-gray-600">
+            <p style={{ color: '#6b7280' }}>
               Connect your Spotify account and discover your music insights
             </p>
           </div>
@@ -29,7 +29,11 @@ const LoginPage: React.FC = () => {
           <GoogleLoginButton />
           
           {error && (
-            <div className="mt-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded">
+            <div className="mt-4 p-3 rounded" style={{ 
+              backgroundColor: '#fef2f2', 
+              border: '1px solid #f87171', 
+              color: '#dc2626' 
+            }}>
               {error}
             </div>
           )}

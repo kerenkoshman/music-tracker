@@ -17,19 +17,33 @@ const Header: React.FC = () => {
       <div className="container">
         <div className="flex justify-between items-center">
           <div className="flex items-center gap-6">
-            <h1 className="text-xl font-bold text-orange-600 cursor-pointer" onClick={() => navigate('/dashboard')}>
+            <h1 
+              className="text-xl font-bold cursor-pointer" 
+              style={{ color: '#ea580c' }}
+              onClick={() => navigate('/dashboard')}
+            >
               Music Tracker
             </h1>
             <nav className="flex gap-4">
               <button 
                 onClick={() => navigate('/dashboard')}
-                className="text-gray-700 hover:text-orange-600 transition-colors"
+                style={{ 
+                  color: '#374151',
+                  transition: 'color 0.2s ease'
+                }}
+                onMouseEnter={(e) => e.currentTarget.style.color = '#ea580c'}
+                onMouseLeave={(e) => e.currentTarget.style.color = '#374151'}
               >
                 Dashboard
               </button>
               <button 
                 onClick={() => navigate('/profile')}
-                className="text-gray-700 hover:text-orange-600 transition-colors"
+                style={{ 
+                  color: '#374151',
+                  transition: 'color 0.2s ease'
+                }}
+                onMouseEnter={(e) => e.currentTarget.style.color = '#ea580c'}
+                onMouseLeave={(e) => e.currentTarget.style.color = '#374151'}
               >
                 Profile
               </button>
@@ -42,9 +56,13 @@ const Header: React.FC = () => {
                 <img 
                   src={user.picture} 
                   alt={user.name}
-                  className="w-8 h-8 rounded-full"
+                  style={{ 
+                    width: '2rem', 
+                    height: '2rem', 
+                    borderRadius: '50%' 
+                  }}
                 />
-                <span className="text-gray-700 font-medium">{user.name}</span>
+                <span style={{ color: '#374151', fontWeight: '500' }}>{user.name}</span>
               </div>
             )}
             <Button variant="outline" onClick={handleLogout}>

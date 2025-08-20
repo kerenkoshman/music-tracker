@@ -25,22 +25,27 @@ const Button: React.FC<ButtonProps> = ({
     ghost: 'btn-secondary'
   };
   
-  const sizeClasses = {
-    sm: 'text-sm px-3 py-1.5',
-    md: 'text-base px-4 py-2',
-    lg: 'text-lg px-6 py-3'
+  const sizeStyles = {
+    sm: { fontSize: '0.875rem', padding: '0.375rem 0.75rem' },
+    md: { fontSize: '1rem', padding: '0.5rem 1rem' },
+    lg: { fontSize: '1.125rem', padding: '0.75rem 1.5rem' }
   };
   
-  const classes = `${baseClasses} ${variantClasses[variant]} ${sizeClasses[size]} ${className}`.trim();
+  const classes = `${baseClasses} ${variantClasses[variant]} ${className}`.trim();
   
   return (
     <button 
       className={classes}
+      style={sizeStyles[size]}
       disabled={disabled || isLoading}
       {...props}
     >
       {isLoading && (
-        <span className="spinner mr-2" style={{ width: '1rem', height: '1rem' }}></span>
+        <span className="spinner" style={{ 
+          width: '1rem', 
+          height: '1rem', 
+          marginRight: '0.5rem' 
+        }}></span>
       )}
       {children}
     </button>

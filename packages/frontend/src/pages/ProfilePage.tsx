@@ -64,8 +64,8 @@ const ProfilePage: React.FC = () => {
   if (isLoading) {
     return (
       <Layout>
-        <div className="flex items-center justify-center h-64">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-orange-600"></div>
+        <div className="flex items-center justify-center" style={{ height: '16rem' }}>
+          <div className="spinner" style={{ width: '3rem', height: '3rem' }}></div>
         </div>
       </Layout>
     );
@@ -73,147 +73,196 @@ const ProfilePage: React.FC = () => {
 
   return (
     <Layout>
-      <div className="max-w-4xl mx-auto space-y-8">
-        {/* Profile Header */}
-        <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-8">
-          <div className="flex items-center space-x-6">
-            {user?.picture ? (
-              <img
-                src={user.picture}
-                alt={user.name}
-                className="h-24 w-24 rounded-full"
-              />
-            ) : (
-              <div className="h-24 w-24 bg-orange-100 rounded-full flex items-center justify-center">
-                <span className="text-4xl font-medium text-orange-600">
-                  {user?.name.charAt(0).toUpperCase()}
-                </span>
+      <div className="main-content">
+        <div className="container" style={{ maxWidth: '64rem', margin: '0 auto' }}>
+          {/* Profile Header */}
+          <div className="card mb-8" style={{ padding: '2rem' }}>
+            <div className="flex items-center gap-6">
+              {user?.picture ? (
+                <img
+                  src={user.picture}
+                  alt={user.name}
+                  style={{ width: '6rem', height: '6rem', borderRadius: '50%' }}
+                />
+              ) : (
+                <div style={{ 
+                  width: '6rem', 
+                  height: '6rem', 
+                  backgroundColor: '#fed7aa', 
+                  borderRadius: '50%',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center'
+                }}>
+                  <span style={{ 
+                    fontSize: '2.25rem', 
+                    fontWeight: '500', 
+                    color: '#ea580c' 
+                  }}>
+                    {user?.name.charAt(0).toUpperCase()}
+                  </span>
+                </div>
+              )}
+              <div style={{ flex: 1 }}>
+                <h1 style={{ fontSize: '1.875rem', fontWeight: 'bold', color: '#111827' }}>{user?.name}</h1>
+                <p style={{ fontSize: '1.125rem', color: '#6b7280' }}>{user?.email}</p>
+                <p style={{ fontSize: '0.875rem', color: '#6b7280', marginTop: '0.25rem' }}>
+                  Member since {new Date(user?.createdAt || '').toLocaleDateString()}
+                </p>
               </div>
-            )}
-            <div className="flex-1">
-              <h1 className="text-3xl font-bold text-gray-900">{user?.name}</h1>
-              <p className="text-lg text-gray-600">{user?.email}</p>
-              <p className="text-sm text-gray-500 mt-1">
-                Member since {new Date(user?.createdAt || '').toLocaleDateString()}
-              </p>
+              <Button
+                variant="outline"
+                onClick={handleLogout}
+              >
+                Logout
+              </Button>
             </div>
-            <Button
-              variant="outline"
-              onClick={handleLogout}
-            >
-              Logout
-            </Button>
           </div>
+
+          {/* Account Information */}
+          <Card title="Account Information" className="mb-8">
+            <div style={{ 
+              display: 'grid', 
+              gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', 
+              gap: '1.5rem' 
+            }}>
+              <div>
+                <label style={{ 
+                  display: 'block', 
+                  fontSize: '0.875rem', 
+                  fontWeight: '500', 
+                  color: '#374151', 
+                  marginBottom: '0.5rem' 
+                }}>
+                  Full Name
+                </label>
+                <p style={{ color: '#111827' }}>{user?.name}</p>
+              </div>
+              <div>
+                <label style={{ 
+                  display: 'block', 
+                  fontSize: '0.875rem', 
+                  fontWeight: '500', 
+                  color: '#374151', 
+                  marginBottom: '0.5rem' 
+                }}>
+                  Email Address
+                </label>
+                <p style={{ color: '#111827' }}>{user?.email}</p>
+              </div>
+              <div>
+                <label style={{ 
+                  display: 'block', 
+                  fontSize: '0.875rem', 
+                  fontWeight: '500', 
+                  color: '#374151', 
+                  marginBottom: '0.5rem' 
+                }}>
+                  Account Created
+                </label>
+                <p style={{ color: '#111827' }}>
+                  {new Date(user?.createdAt || '').toLocaleDateString()}
+                </p>
+              </div>
+              <div>
+                <label style={{ 
+                  display: 'block', 
+                  fontSize: '0.875rem', 
+                  fontWeight: '500', 
+                  color: '#374151', 
+                  marginBottom: '0.5rem' 
+                }}>
+                  Last Updated
+                </label>
+                <p style={{ color: '#111827' }}>
+                  {new Date(user?.updatedAt || '').toLocaleDateString()}
+                </p>
+              </div>
+            </div>
+          </Card>
+
+          {/* Spotify Connection */}
+          <Card title="Spotify Connection" className="mb-8">
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+              <div className="flex items-center justify-between">
+                <div>
+                  <p style={{ fontSize: '0.875rem', fontWeight: '500', color: '#374151' }}>Connection Status</p>
+                  <p style={{ 
+                    fontSize: '0.875rem', 
+                    color: spotifyStatus.connected ? '#059669' : '#dc2626' 
+                  }}>
+                    {spotifyStatus.connected ? 'Connected' : 'Not Connected'}
+                  </p>
+                </div>
+                <div>
+                  {spotifyStatus.connected ? (
+                    <Button
+                      variant="outline"
+                      onClick={handleSpotifyDisconnect}
+                    >
+                      Disconnect
+                    </Button>
+                  ) : (
+                    <Button
+                      onClick={handleSpotifyConnect}
+                    >
+                      Connect
+                    </Button>
+                  )}
+                </div>
+              </div>
+
+              {spotifyStatus.lastSync && (
+                <div>
+                  <p style={{ fontSize: '0.875rem', fontWeight: '500', color: '#374151' }}>Last Data Sync</p>
+                  <p style={{ fontSize: '0.875rem', color: '#111827' }}>
+                    {new Date(spotifyStatus.lastSync).toLocaleString()}
+                  </p>
+                </div>
+              )}
+
+              <div style={{ 
+                backgroundColor: '#f9fafb', 
+                borderRadius: '0.5rem', 
+                padding: '1rem' 
+              }}>
+                <h4 style={{ fontSize: '0.875rem', fontWeight: '500', color: '#374151', marginBottom: '0.5rem' }}>What we track:</h4>
+                <ul style={{ fontSize: '0.875rem', color: '#6b7280', display: 'flex', flexDirection: 'column', gap: '0.25rem' }}>
+                  <li>• Your top artists and songs</li>
+                  <li>• Listening history and patterns</li>
+                  <li>• Genre preferences and trends</li>
+                  <li>• Music discovery insights</li>
+                </ul>
+              </div>
+            </div>
+          </Card>
+
+          {/* Privacy & Data */}
+          <Card title="Privacy & Data">
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+              <div>
+                <h4 style={{ fontSize: '0.875rem', fontWeight: '500', color: '#374151', marginBottom: '0.5rem' }}>Data Usage</h4>
+                <p style={{ fontSize: '0.875rem', color: '#6b7280' }}>
+                  We only access your Spotify listening data to provide personalized insights. 
+                  Your data is never shared with third parties and is stored securely.
+                </p>
+              </div>
+              <div>
+                <h4 style={{ fontSize: '0.875rem', fontWeight: '500', color: '#374151', marginBottom: '0.5rem' }}>Data Retention</h4>
+                <p style={{ fontSize: '0.875rem', color: '#6b7280' }}>
+                  We retain your listening history for 1 week to provide meaningful insights. 
+                  You can disconnect your Spotify account at any time to stop data collection.
+                </p>
+              </div>
+              <div>
+                <h4 style={{ fontSize: '0.875rem', fontWeight: '500', color: '#374151', marginBottom: '0.5rem' }}>Account Deletion</h4>
+                <p style={{ fontSize: '0.875rem', color: '#6b7280' }}>
+                  To delete your account and all associated data, please contact our support team.
+                </p>
+              </div>
+            </div>
+          </Card>
         </div>
-
-        {/* Account Information */}
-        <Card title="Account Information">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Full Name
-              </label>
-              <p className="text-gray-900">{user?.name}</p>
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Email Address
-              </label>
-              <p className="text-gray-900">{user?.email}</p>
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Account Created
-              </label>
-              <p className="text-gray-900">
-                {new Date(user?.createdAt || '').toLocaleDateString()}
-              </p>
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Last Updated
-              </label>
-              <p className="text-gray-900">
-                {new Date(user?.updatedAt || '').toLocaleDateString()}
-              </p>
-            </div>
-          </div>
-        </Card>
-
-        {/* Spotify Connection */}
-        <Card title="Spotify Connection">
-          <div className="space-y-4">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm font-medium text-gray-700">Connection Status</p>
-                <p className={`text-sm ${spotifyStatus.connected ? 'text-green-600' : 'text-red-600'}`}>
-                  {spotifyStatus.connected ? 'Connected' : 'Not Connected'}
-                </p>
-              </div>
-              <div>
-                {spotifyStatus.connected ? (
-                  <Button
-                    variant="outline"
-                    onClick={handleSpotifyDisconnect}
-                  >
-                    Disconnect
-                  </Button>
-                ) : (
-                  <Button
-                    onClick={handleSpotifyConnect}
-                  >
-                    Connect
-                  </Button>
-                )}
-              </div>
-            </div>
-
-            {spotifyStatus.lastSync && (
-              <div>
-                <p className="text-sm font-medium text-gray-700">Last Data Sync</p>
-                <p className="text-sm text-gray-900">
-                  {new Date(spotifyStatus.lastSync).toLocaleString()}
-                </p>
-              </div>
-            )}
-
-            <div className="bg-gray-50 rounded-lg p-4">
-              <h4 className="text-sm font-medium text-gray-700 mb-2">What we track:</h4>
-              <ul className="text-sm text-gray-600 space-y-1">
-                <li>• Your top artists and songs</li>
-                <li>• Listening history and patterns</li>
-                <li>• Genre preferences and trends</li>
-                <li>• Music discovery insights</li>
-              </ul>
-            </div>
-          </div>
-        </Card>
-
-        {/* Privacy & Data */}
-        <Card title="Privacy & Data">
-          <div className="space-y-4">
-            <div>
-              <h4 className="text-sm font-medium text-gray-700 mb-2">Data Usage</h4>
-              <p className="text-sm text-gray-600">
-                We only access your Spotify listening data to provide personalized insights. 
-                Your data is never shared with third parties and is stored securely.
-              </p>
-            </div>
-            <div>
-              <h4 className="text-sm font-medium text-gray-700 mb-2">Data Retention</h4>
-              <p className="text-sm text-gray-600">
-                We retain your listening history for 1 week to provide meaningful insights. 
-                You can disconnect your Spotify account at any time to stop data collection.
-              </p>
-            </div>
-            <div>
-              <h4 className="text-sm font-medium text-gray-700 mb-2">Account Deletion</h4>
-              <p className="text-sm text-gray-600">
-                To delete your account and all associated data, please contact our support team.
-              </p>
-            </div>
-          </div>
-        </Card>
       </div>
     </Layout>
   );

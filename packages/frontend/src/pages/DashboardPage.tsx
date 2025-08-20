@@ -76,10 +76,10 @@ const DashboardPage: React.FC = () => {
         <div className="container">
           {/* Welcome Section */}
           <div className="text-center mb-8">
-            <h1 className="text-3xl font-bold text-gray-900 mb-2">
+            <h1 className="text-3xl font-bold mb-2" style={{ color: '#111827' }}>
               Welcome back, {user?.name}! 🎵
             </h1>
-            <p className="text-gray-600">
+            <p style={{ color: '#6b7280' }}>
               Track your music listening habits and discover insights about your taste
             </p>
           </div>
@@ -89,12 +89,17 @@ const DashboardPage: React.FC = () => {
             {spotifyStatus.connected ? (
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
-                  <div className="w-3 h-3 bg-green-500 rounded-full"></div>
-                  <span className="text-green-700 font-medium">
+                  <div style={{ 
+                    width: '0.75rem', 
+                    height: '0.75rem', 
+                    backgroundColor: '#10b981', 
+                    borderRadius: '50%' 
+                  }}></div>
+                  <span style={{ color: '#047857', fontWeight: '500' }}>
                     Connected to Spotify
                   </span>
                   {spotifyStatus.username && (
-                    <span className="text-gray-600">
+                    <span style={{ color: '#6b7280' }}>
                       as {spotifyStatus.username}
                     </span>
                   )}
@@ -109,7 +114,7 @@ const DashboardPage: React.FC = () => {
               </div>
             ) : (
               <div className="text-center">
-                <p className="text-gray-600 mb-4">
+                <p style={{ color: '#6b7280', marginBottom: '1rem' }}>
                   Connect your Spotify account to start tracking your music
                 </p>
                 <Button 
@@ -123,28 +128,41 @@ const DashboardPage: React.FC = () => {
           </Card>
 
           {/* Quick Stats */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+          <div style={{ 
+            display: 'grid', 
+            gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', 
+            gap: '1.5rem', 
+            marginBottom: '2rem' 
+          }}>
             <Card title="Total Tracks" className="text-center">
-              <div className="text-3xl font-bold text-orange-600">0</div>
-              <p className="text-gray-600">tracks analyzed</p>
+              <div style={{ fontSize: '1.875rem', fontWeight: 'bold', color: '#ea580c' }}>0</div>
+              <p style={{ color: '#6b7280' }}>tracks analyzed</p>
             </Card>
             <Card title="Top Artists" className="text-center">
-              <div className="text-3xl font-bold text-orange-600">0</div>
-              <p className="text-gray-600">artists discovered</p>
+              <div style={{ fontSize: '1.875rem', fontWeight: 'bold', color: '#ea580c' }}>0</div>
+              <p style={{ color: '#6b7280' }}>artists discovered</p>
             </Card>
             <Card title="Listening Time" className="text-center">
-              <div className="text-3xl font-bold text-orange-600">0h</div>
-              <p className="text-gray-600">total time</p>
+              <div style={{ fontSize: '1.875rem', fontWeight: 'bold', color: '#ea580c' }}>0h</div>
+              <p style={{ color: '#6b7280' }}>total time</p>
             </Card>
           </div>
 
           {/* Call to Action */}
           {!spotifyStatus.connected && (
-            <Card className="text-center bg-orange-50 border-orange-200">
-              <h3 className="text-xl font-semibold text-orange-800 mb-2">
+            <Card className="text-center" style={{ 
+              backgroundColor: '#fff7ed', 
+              border: '1px solid #fed7aa' 
+            }}>
+              <h3 style={{ 
+                fontSize: '1.25rem', 
+                fontWeight: '600', 
+                color: '#9a3412', 
+                marginBottom: '0.5rem' 
+              }}>
                 Ready to discover your music taste?
               </h3>
-              <p className="text-orange-700 mb-4">
+              <p style={{ color: '#c2410c', marginBottom: '1rem' }}>
                 Connect your Spotify account to see your top artists, songs, and listening patterns
               </p>
               <Button onClick={handleConnectSpotify} isLoading={isLoading}>

@@ -65,8 +65,8 @@ const GoogleLoginButton: React.FC = () => {
   }, [handleCredentialResponse]);
 
   return (
-    <div className="w-full">
-      <div id="google-login-button" className="w-full"></div>
+    <div style={{ width: '100%' }}>
+      <div id="google-login-button" style={{ width: '100%' }}></div>
     </div>
   );
 };

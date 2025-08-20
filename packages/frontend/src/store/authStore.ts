@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { AuthState, User } from '../types/auth';
+import { AuthState, User } from '../types';
 
 interface AuthStore extends AuthState {
   setUser: (user: User | null) => void;

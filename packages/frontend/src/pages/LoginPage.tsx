@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import GoogleLoginButton from '../components/auth/GoogleLoginButton';
-import { useAuthStore } from '../../store/authStore';
+import { useAuthStore } from '../store/authStore';
 
 const LoginPage: React.FC = () => {
   const navigate = useNavigate();
@@ -14,7 +14,12 @@ const LoginPage: React.FC = () => {
   }, [isAuthenticated, navigate]);
 
   return (
-    <div className="min-h-screen flex items-center justify-center">
+    <div style={{ 
+      minHeight: '100vh',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center'
+    }}>
       <div className="container">
         <div className="card" style={{ maxWidth: '28rem', margin: '0 auto' }}>
           <div className="text-center mb-6">

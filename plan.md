@@ -26,13 +26,13 @@ A web application to track users' music listening habits and display statistics 
 - [ ] Configure basic CI/CD pipeline
 
 ## Phase 2: Backend Foundation
-- [ ] Initialize Node.js/Express backend
-- [ ] Set up PostgreSQL database connection
-- [ ] Configure Drizzle ORM and create initial schema
-- [ ] Set up environment configuration (.env files)
-- [ ] Create basic health check endpoint
-- [ ] Set up logging and error handling middleware
-- [ ] Configure CORS for frontend communication
+- [x] Initialize Node.js/Express backend
+- [x] Set up PostgreSQL database connection
+- [x] Configure Drizzle ORM and create initial schema
+- [x] Set up environment configuration (.env files)
+- [x] Create basic health check endpoint
+- [x] Set up logging and error handling middleware
+- [x] Configure CORS for frontend communication
 
 ## Phase 3: Database Schema Design
 - [ ] Design user table (Google OAuth integration)

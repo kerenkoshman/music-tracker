@@ -14,7 +14,7 @@
     "lint:fix": "eslint src --ext .ts --fix",
     "clean": "rm -rf dist",
     "db:migrate": "drizzle-kit migrate",
-    "db:generate": "drizzle-kit generate",
+    "db:generate": "drizzle-kit generate:pg",
     "db:seed": "tsx src/db/seed.ts",
     "db:studio": "drizzle-kit studio"
   },

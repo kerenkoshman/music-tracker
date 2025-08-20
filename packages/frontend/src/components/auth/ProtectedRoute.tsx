@@ -18,10 +18,16 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-orange-50 to-amber-50 flex items-center justify-center">
+      <div style={{ 
+        minHeight: '100vh',
+        background: 'linear-gradient(135deg, #fff7ed 0%, #fef3c7 100%)',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center'
+      }}>
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-orange-600 mx-auto"></div>
-          <p className="mt-4 text-gray-600">Loading...</p>
+          <div className="spinner" style={{ width: '3rem', height: '3rem', margin: '0 auto' }}></div>
+          <p style={{ marginTop: '1rem', color: '#6b7280' }}>Loading...</p>
         </div>
       </div>
     );

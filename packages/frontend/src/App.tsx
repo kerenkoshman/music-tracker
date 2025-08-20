@@ -6,7 +6,7 @@ import LoginPage from './components/auth/LoginPage';
 import DashboardPage from './pages/DashboardPage';
 import ProfilePage from './pages/ProfilePage';
 import ProtectedRoute from './components/auth/ProtectedRoute';
-import './App.css';
+import './index.css';
 
 function App() {
   const { setUser, setLoading } = useAuthStore();

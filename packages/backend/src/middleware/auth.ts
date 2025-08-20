@@ -24,7 +24,7 @@ export async function authenticateToken(
   req: Request,
   res: Response,
   next: NextFunction
-) {
+): Promise<void> {
   try {
     const authHeader = req.headers.authorization;
     const token = extractTokenFromHeader(authHeader);
@@ -40,12 +40,13 @@ export async function authenticateToken(
       .limit(1);
 
     if (!user) {
-      return res.status(401).json({
+      res.status(401).json({
         success: false,
         error: {
           message: 'User not found',
         },
       });
+      return;
     }
 
     // Attach user to request
@@ -59,7 +60,7 @@ export async function authenticateToken(
 
     next();
   } catch (error) {
-    return res.status(401).json({
+    res.status(401).json({
       success: false,
       error: {
         message: 'Invalid or expired token',
@@ -73,11 +74,12 @@ export async function optionalAuth(
   req: Request,
   res: Response,
   next: NextFunction
-) {
+): Promise<void> {
   try {
     const authHeader = req.headers.authorization;
     if (!authHeader) {
-      return next();
+      next();
+      return;
     }
 
     const token = extractTokenFromHeader(authHeader);

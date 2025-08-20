@@ -44,13 +44,13 @@ A web application to track users' music listening habits and display statistics 
 - [x] Write database connection tests
 
 ## Phase 4: Authentication System
-- [ ] Set up Google OAuth configuration
-- [ ] Create authentication middleware
-- [ ] Implement login/logout endpoints
-- [ ] Set up session management
-- [ ] Create user profile endpoints
-- [ ] Add authentication tests
-- [ ] Set up protected route middleware
+- [x] Set up Google OAuth configuration
+- [x] Create authentication middleware
+- [x] Implement login/logout endpoints
+- [x] Set up session management
+- [x] Create user profile endpoints
+- [x] Add authentication tests
+- [x] Set up protected route middleware
 
 ## Phase 5: Spotify Integration
 - [ ] Set up Spotify API credentials

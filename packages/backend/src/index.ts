@@ -8,7 +8,9 @@ import { notFoundHandler } from './middleware/notFoundHandler.js';
 import { healthRouter } from './routes/health.js';
 import { authRouter } from './routes/auth.js';
 import { usersRouter } from './routes/users.js';
+import { spotifyRouter } from './routes/spotify.js';
 import { validateAuthConfig } from './config/auth.js';
+import { validateSpotifyConfig } from './config/spotify.js';
 
 // Load environment variables
 config();
@@ -18,6 +20,13 @@ try {
   validateAuthConfig();
 } catch (error) {
   console.warn('⚠️  Authentication configuration warning:', error);
+}
+
+// Validate Spotify configuration
+try {
+  validateSpotifyConfig();
+} catch (error) {
+  console.warn('⚠️  Spotify configuration warning:', error);
 }
 
 const app = express();
@@ -37,6 +46,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/api/health', healthRouter);
 app.use('/api/auth', authRouter);
 app.use('/api/users', usersRouter);
+app.use('/api/spotify', spotifyRouter);
 
 // Error handling middleware
 app.use(notFoundHandler);

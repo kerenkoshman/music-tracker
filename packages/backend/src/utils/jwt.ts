@@ -12,8 +12,8 @@ export interface JWTPayload {
 // Generate JWT token
 export function generateToken(payload: Omit<JWTPayload, 'iat' | 'exp'>): string {
   return jwt.sign(payload, jwtConfig.secret as string, {
-    expiresIn: jwtConfig.expiresIn,
-  });
+    expiresIn: jwtConfig.expiresIn as string,
+  } as any);
 }
 
 // Verify JWT token

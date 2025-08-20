@@ -35,13 +35,13 @@ A web application to track users' music listening habits and display statistics 
 - [x] Configure CORS for frontend communication
 
 ## Phase 3: Database Schema Design
-- [ ] Design user table (Google OAuth integration)
-- [ ] Design Spotify connection table
-- [ ] Design listening history table
-- [ ] Design artists and songs tables
-- [ ] Create database migrations
-- [ ] Set up seed data for development
-- [ ] Write database connection tests
+- [x] Design user table (Google OAuth integration)
+- [x] Design Spotify connection table
+- [x] Design listening history table
+- [x] Design artists and songs tables
+- [x] Create database migrations
+- [x] Set up seed data for development
+- [x] Write database connection tests
 
 ## Phase 4: Authentication System
 - [ ] Set up Google OAuth configuration

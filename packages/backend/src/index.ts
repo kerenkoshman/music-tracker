@@ -6,9 +6,19 @@ import { config } from 'dotenv';
 import { errorHandler } from './middleware/errorHandler.js';
 import { notFoundHandler } from './middleware/notFoundHandler.js';
 import { healthRouter } from './routes/health.js';
+import { authRouter } from './routes/auth.js';
+import { usersRouter } from './routes/users.js';
+import { validateAuthConfig } from './config/auth.js';
 
 // Load environment variables
 config();
+
+// Validate authentication configuration
+try {
+  validateAuthConfig();
+} catch (error) {
+  console.warn('⚠️  Authentication configuration warning:', error);
+}
 
 const app = express();
 const PORT = process.env['PORT'] || 3000;
@@ -25,6 +35,8 @@ app.use(express.urlencoded({ extended: true }));
 
 // Routes
 app.use('/api/health', healthRouter);
+app.use('/api/auth', authRouter);
+app.use('/api/users', usersRouter);
 
 // Error handling middleware
 app.use(notFoundHandler);

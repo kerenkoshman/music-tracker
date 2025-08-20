@@ -28,22 +28,24 @@ describe('Database Schema', () => {
 
   describe('Users table', () => {
     it('should create a user successfully', async () => {
-      const [user] = await db.insert(users).values({
-        googleId: 'test_google_id',
-        email: 'test@example.com',
-        name: 'Test User',
-        picture: 'https://example.com/avatar.jpg',
-      }).returning();
+          const [user] = await db.insert(users).values({
+      googleId: 'test_google_id',
+      email: 'test@example.com',
+      name: 'Test User',
+      picture: 'https://example.com/avatar.jpg',
+    }).returning();
 
-      expect(user).toBeDefined();
-      expect(user.googleId).toBe('test_google_id');
-      expect(user.email).toBe('test@example.com');
-      expect(user.name).toBe('Test User');
-      expect(user.id).toBeDefined();
-      expect(user.createdAt).toBeDefined();
-      expect(user.updatedAt).toBeDefined();
+    expect(user).toBeDefined();
+    if (!user) throw new Error('User creation failed');
+    
+    expect(user.googleId).toBe('test_google_id');
+    expect(user.email).toBe('test@example.com');
+    expect(user.name).toBe('Test User');
+    expect(user.id).toBeDefined();
+    expect(user.createdAt).toBeDefined();
+    expect(user.updatedAt).toBeDefined();
 
-      testUserId = user.id;
+    testUserId = user.id;
     });
 
     it('should enforce unique Google ID constraint', async () => {
@@ -68,6 +70,8 @@ describe('Database Schema', () => {
       }).returning();
 
       expect(artist).toBeDefined();
+      if (!artist) throw new Error('Artist creation failed');
+      
       expect(artist.spotifyId).toBe('test_spotify_artist_id');
       expect(artist.name).toBe('Test Artist');
       expect(artist.popularity).toBe(85);
@@ -99,6 +103,8 @@ describe('Database Schema', () => {
       }).returning();
 
       expect(song).toBeDefined();
+      if (!song) throw new Error('Song creation failed');
+      
       expect(song.spotifyId).toBe('test_spotify_song_id');
       expect(song.name).toBe('Test Song');
       expect(song.artistId).toBe(testArtistId);
@@ -130,6 +136,8 @@ describe('Database Schema', () => {
       }).returning();
 
       expect(connection).toBeDefined();
+      if (!connection) throw new Error('Connection creation failed');
+      
       expect(connection.userId).toBe(testUserId);
       expect(connection.spotifyId).toBe('test_spotify_user_id');
       expect(connection.isActive).toBe(true);
@@ -147,6 +155,8 @@ describe('Database Schema', () => {
       }).returning();
 
       expect(history).toBeDefined();
+      if (!history) throw new Error('History creation failed');
+      
       expect(history.userId).toBe(testUserId);
       expect(history.songId).toBe(testSongId);
       expect(history.duration).toBe(120);

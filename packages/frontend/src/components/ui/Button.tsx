@@ -1,10 +1,11 @@
 import React from 'react';
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: 'primary' | 'secondary' | 'outline' | 'ghost';
+  variant?: 'primary' | 'secondary' | 'outline';
   size?: 'sm' | 'md' | 'lg';
   isLoading?: boolean;
   children: React.ReactNode;
+  className?: string;
 }
 
 const Button: React.FC<ButtonProps> = ({ 
@@ -14,21 +15,20 @@ const Button: React.FC<ButtonProps> = ({
   children, 
   className = '',
   disabled,
+  style,
   ...props 
 }) => {
   const baseClasses = 'btn';
-  
   const variantClasses = {
     primary: 'btn-primary',
     secondary: 'btn-secondary',
-    outline: 'btn-outline',
-    ghost: 'btn-secondary'
+    outline: 'btn-outline'
   };
   
   const sizeStyles = {
-    sm: { fontSize: '0.875rem', padding: '0.375rem 0.75rem' },
-    md: { fontSize: '1rem', padding: '0.5rem 1rem' },
-    lg: { fontSize: '1.125rem', padding: '0.75rem 1.5rem' }
+    sm: { padding: '0.5rem 1rem', fontSize: '0.75rem' },
+    md: { padding: '0.75rem 1.5rem', fontSize: '0.875rem' },
+    lg: { padding: '1rem 2rem', fontSize: '1rem' }
   };
   
   const classes = `${baseClasses} ${variantClasses[variant]} ${className}`.trim();
@@ -36,7 +36,7 @@ const Button: React.FC<ButtonProps> = ({
   return (
     <button 
       className={classes}
-      style={sizeStyles[size]}
+      style={{ ...sizeStyles[size], ...style }}
       disabled={disabled || isLoading}
       {...props}
     >
